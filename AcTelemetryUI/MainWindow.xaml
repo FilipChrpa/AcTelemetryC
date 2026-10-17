@@ -40,7 +40,7 @@
             <!-- Střední sloupec: Kvalt -->
             <Border Grid.Column="1" Background="#1E1E1E" CornerRadius="12" Padding="35,15" Margin="30,0,30,0" VerticalAlignment="Center" Height="152">
                 <StackPanel Margin="0,0,0,35">
-                    <TextBlock x:Name="GearText" Text="N" FontSize="80" FontWeight="Bold" Foreground="#00E676" Height="111"/>
+                    <TextBlock x:Name="GearText" Text="N" FontSize="80" FontWeight="Bold" Height="111"/>
                 </StackPanel>
             </Border>
 

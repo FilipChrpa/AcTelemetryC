@@ -53,14 +53,12 @@ namespace AcTelemetryUI
                     _lastSpeed = currentSpeed;
                 }
 
-                // Přepis otáček jen při změně
                 if (data.Rpms != _lastRpm)
                 {
                     RpmText.Text = data.Rpms.ToString();
                     _lastRpm = data.Rpms;
                 }
 
-                // Přepis kvaltu jen při přeřazení
                 if (data.Gear != _lastGear)
                 {
                     GearText.Text = FormatGear(data.Gear);
