@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="AcTelemetryC/AcTelemetryC.csproj" />
+  <Project Path="AcTelemetryUI/AcTelemetryUI.csproj" Id="99ee7c34-a6ba-4baa-b877-83246878184c" />
 </Solution>
