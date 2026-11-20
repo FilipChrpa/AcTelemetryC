@@ -25,7 +25,7 @@ namespace AcTelemetryUI
         private int _lastRpm = -1;
         private int _lastGear = -1;
 
-        // Reference pro graf pedálů
+        // Pedal Telemetry
         private const int BufferCapacity = 900;
         private DataStreamer _gasStreamer = null!;
         private DataStreamer _brakeStreamer = null!;
@@ -42,36 +42,46 @@ namespace AcTelemetryUI
         {
             var plot = PedalsPlot.Plot;
 
-            // Barvy grafu
+            PedalsPlot.UserInputProcessor.IsEnabled = false;
+
+            // Graph Bacground
             plot.FigureBackground.Color = ScottPlot.Color.FromHex("#1E1E1E");
             plot.DataBackground.Color = ScottPlot.Color.FromHex("#121212");
             plot.Axes.Color(ScottPlot.Color.FromHex("#555555"));
             plot.Grid.MajorLineColor = ScottPlot.Color.FromHex("#222222");
 
-            // Rozsah pedálů 0 až 100 %
+            // Pedal Travel 0 - 100%
             plot.Axes.Left.Min = 0;
             plot.Axes.Left.Max = 105;
 
-            // Skrytí spodní osy X
+            plot.Axes.Bottom.Min = 0;
+            plot.Axes.Bottom.Max = BufferCapacity;
+
+            // Hiding bottom axes
             plot.Axes.Bottom.TickLabelStyle.IsVisible = false;
             plot.Axes.Bottom.FrameLineStyle.IsVisible = false;
 
-            // Plyn (zelená)
+            // Throttle
             _gasStreamer = plot.Add.DataStreamer(BufferCapacity);
             _gasStreamer.Color = new ScottPlot.Color(0, 230, 118, 220);
             _gasStreamer.LineWidth = 2.5f;
             _gasStreamer.LegendText = "Gas";
+            _gasStreamer.ManageAxisLimits = false;
             _gasStreamer.ViewScrollLeft();
 
-            // Brzda (červená)
+            // Brake
             _brakeStreamer = plot.Add.DataStreamer(BufferCapacity);
             _brakeStreamer.Color = new ScottPlot.Color(255, 23, 68, 220);
             _brakeStreamer.LineWidth = 2.5f;
             _brakeStreamer.LegendText = "Brake";
+            _brakeStreamer.ManageAxisLimits = false;
             _brakeStreamer.ViewScrollLeft();
 
+            //Dissable legend and anti-aliasing
             plot.Legend.IsVisible = false;
-            PedalsPlot.Refresh();
+            _gasStreamer.LineStyle.AntiAlias = false;
+            _brakeStreamer.LineStyle.AntiAlias = false;
+            //PedalsPlot.Refresh();
         }
 
         private void OnRendering(object? sender, EventArgs e)
@@ -108,7 +118,7 @@ namespace AcTelemetryUI
                     _lastGear = data.Gear;
                 }
 
-                // Zápis hodnot do grafu pedálů
+                // AC pedals 0.0 - 1.0 
                 _gasStreamer.Add(data.Gas * 100.0);
                 _brakeStreamer.Add(data.Brake * 100.0);
                 PedalsPlot.Refresh();

@@ -8,14 +8,14 @@
         WindowStartupLocation="CenterScreen">
 
     <Grid Margin="20">
-        <!-- Rozdělení okna na 3 řádky: Stavový řádek, Hlavní budíky, Pedály -->
+        <!-- 3 Main Rows-->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- 1. ŘÁDEK: Stav připojení -->
+        <!-- 1. Row: Connection Status  -->
         <TextBlock x:Name="StatusText" 
                    Grid.Row="0"
                    Text="Waiting.." 
@@ -23,7 +23,7 @@
                    Foreground="#FFA500" 
                    HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
-        <!-- 2. ŘÁDEK: Rychlost, Zařazený stupeň, Otáčky (3 sloupce) -->
+        <!-- 2. Row: 3 Columns - Speed, Gear, RPM -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -31,21 +31,21 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- Levý sloupec: Rychlost -->
+            <!-- Left Column: Speed -->
             <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock Text="" FontSize="14" Foreground="#888888" HorizontalAlignment="Center"/>
                 <TextBlock x:Name="SpeedText" Text="0" FontSize="64" FontWeight="Bold" HorizontalAlignment="Center"/>
                 <TextBlock Text="km/h" FontSize="16" Foreground="#888888" HorizontalAlignment="Center"/>
             </StackPanel>
 
-            <!-- Střední sloupec: Kvalt -->
+            <!-- Middle Column: Gear -->
             <Border Grid.Column="1" Background="#1E1E1E" CornerRadius="12" Padding="35,15" Margin="30,0,30,0" VerticalAlignment="Center" Height="152">
                 <StackPanel Margin="0,-5,0,35">
                     <TextBlock x:Name="GearText" Text="N" FontSize="80" FontWeight="Bold" Height="111"/>
                 </StackPanel>
             </Border>
 
-            <!-- Pravý sloupec: Otáčky (RPM) -->
+            <!-- Right Column: RPM -->
             <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock Text="" FontSize="14" Foreground="#888888" HorizontalAlignment="Center"/>
                 <TextBlock x:Name="RpmText" Text="0" FontSize="64" FontWeight="Bold" HorizontalAlignment="Center"/>
@@ -53,7 +53,7 @@
             </StackPanel>
         </Grid>
 
-        <!-- 3. ŘÁDEK: Graf pedálů (Plyn a Brzda) -->
+        <!-- 3. Row: Pedals input graph -->
         <Border Grid.Row="2" 
         Margin="0,15,0,0" 
         Background="#1E1E1E" 
